@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t franadam/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true franadam/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t franadam/multi-client ./client
+  - docker build -t franadam/multi-nginx ./nginx
+  - docker build -t franadam/multi-server ./server
+  - docker build -t franadam/multi-worker ./worker
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  # push the images to docker hub
+  - docker push franadam/multi-client 
+  - docker push franadam/multi-nginx
+  - docker push franadam/multi-server 
+  - docker push franadam/multi-worker 
