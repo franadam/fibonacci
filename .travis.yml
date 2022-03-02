@@ -17,7 +17,7 @@ after_success:
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push the images to docker hub
-  - docker push franadam/multi-client 
+  - docker push franadam/multi-client
   - docker push franadam/multi-nginx
-  - docker push franadam/multi-server 
-  - docker push franadam/multi-worker 
+  - docker push franadam/multi-server
+  - docker push franadam/multi-worker
