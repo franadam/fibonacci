@@ -1,6 +1,6 @@
 {
   "AWSEBDockerrunVersion":2,
-  "containerDefinitins":[
+  "containerDefinitions":[
     {
       "name":"client", 
       "image":"franadam/multi-client",
