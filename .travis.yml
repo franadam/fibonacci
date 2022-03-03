@@ -21,3 +21,15 @@ after_success:
   - docker push franadam/multi-nginx
   - docker push franadam/multi-server
   - docker push franadam/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-3'
+  app: 'fibonacci'
+  env: 'Fibonacci-env'
+  bucket_name: 'elasticbeanstalk-eu-west-3-259765538732'
+  bucket_path: 'fibonacci'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

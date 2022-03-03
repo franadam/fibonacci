@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion":2,
+  "containerDefinitins":[
+    {
+      "name":"client", 
+      "image":"franadam/multi-client",
+      "memory":128,
+      "hostname":"client",
+      "essential":false
+    },{
+      "name":"server", 
+      "image":"franadam/multi-server",
+      "memory":128,
+      "hostname":"api",
+      "essential":false
+    },{
+      "name":"worker", 
+      "image":"franadam/multi-worker",
+      "hostname":"worker",
+      "memory":128,
+      "essential":false
+    },{
+      "name":"nginx", 
+      "image":"franadam/multi-nginx",
+      "essential":true,
+      "memory":128,
+      "portMappings":[
+        {
+          "hostPort":80,
+          "containerPort":80
+        }
+      ],
+      "links" : ["client", "server"]
+    }
+  ]
+}
